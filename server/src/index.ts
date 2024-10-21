@@ -1,4 +1,4 @@
-import express, { Application, NextFunction, Request, Response } from "express";
+import express from "express";
 import IndexRouter from "./routes";
 import cors from "cors";
 import "dotenv/config";

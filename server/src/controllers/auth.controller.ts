@@ -2,11 +2,13 @@ import { Request, Response } from "express";
 import { User } from "../models/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { loginSchema, registerSchema } from "../zodSchema/Schema";
+import { ZodError } from "zod";
+import { formatError } from "../helper";
 
 export const RegisterController = async (req: Request, res: Response) => {
     try {
-
-        const body = req.body;
+        const body = registerSchema.parse(req.body);
 
         if (!body.email || !body.DOB || !body.name || !body.password) {
             res.status(400).json(
@@ -74,6 +76,17 @@ export const RegisterController = async (req: Request, res: Response) => {
         return;
 
     } catch (error) {
+
+        if (error instanceof ZodError) {
+            const errors = formatError(error);
+            res.status(400).json(
+                {
+                    errors,
+                    message: "Zod error"
+                }
+            );
+            return;
+        }
         console.log("[REGISTER_USER_ERROR_POST]", error);
         res.status(500).json(
             {
@@ -88,7 +101,8 @@ export const RegisterController = async (req: Request, res: Response) => {
 export const LoginController = async (req: Request, res: Response) => {
     try {
 
-        const body = req.body;
+
+        const body = loginSchema.parse(req.body);
 
         if (!body.password || !body.email) {
             res.status(400).json(
@@ -150,6 +164,17 @@ export const LoginController = async (req: Request, res: Response) => {
 
 
     } catch (error) {
+
+        if (error instanceof ZodError) {
+            const errors = formatError(error);
+            res.status(400).json(
+                {
+                    errors,
+                    message: "Zod error"
+                }
+            );
+            return;
+        }
         console.log("[REGISTER_USER_ERROR_POST]", error);
         res.status(500).json(
             {
