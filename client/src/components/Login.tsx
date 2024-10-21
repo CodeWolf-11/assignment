@@ -1,11 +1,12 @@
 import Password from "../icons/Password"
 import User from "../icons/User"
 import Image from "../assets/image.png";
-import { Link } from "react-router-dom";
+import { Link, useAsyncError } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import { LOGIN_URL } from "../lib/ApiEndpoints";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/AuthProvider";
 
 function Login() {
 
@@ -13,6 +14,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [rootError, setRootError] = useState("");
+    const { setIsLoggedIn } = useAuth();
     const [errors, setErrors] = useState({
         email: "",
         password: ""
@@ -38,6 +40,9 @@ function Login() {
                 password: ""
             });
             setIsLoading(false);
+            localStorage.setItem("token", res?.data?.token);
+            localStorage.setItem("user", res?.data?.data);
+            setIsLoggedIn(true);
             navigate("/");
 
         } catch (error) {

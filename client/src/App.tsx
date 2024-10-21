@@ -3,21 +3,24 @@ import Register from "./components/Register"
 import TableComponent from "./components/TableComponent"
 import { data } from "./data"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { useAuth } from "./store/AuthProvider"
 
 function App() {
+
+  const { isLoggedIn } = useAuth();
 
   const appRoutes = [
     {
       path: "/register",
-      element: <Register />
+      element: isLoggedIn ? <TableComponent data={data} /> : <Register />
     },
     {
       path: "/login",
-      element: <Login />
+      element: isLoggedIn ? <TableComponent data={data} /> : <Login />
     },
     {
       path: "/",
-      element: <TableComponent data={data} />
+      element: isLoggedIn ? <TableComponent data={data} /> : <Login />
     }
   ]
 

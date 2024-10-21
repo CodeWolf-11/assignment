@@ -3,6 +3,7 @@ import Image from "../assets/image.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import { REGISTER_URL } from "../lib/ApiEndpoints";
+import { useAuth } from "../store/AuthProvider";
 
 function Register() {
 
@@ -12,6 +13,7 @@ function Register() {
     const [name, setName] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [rootError, setRootError] = useState("");
+    const { setIsLoggedIn } = useAuth();
     const [errors, setErrors] = useState({
         email: "",
         DOB: "",
@@ -45,6 +47,9 @@ function Register() {
                 password: ""
             });
             setIsLoading(false);
+            localStorage.setItem("token", res?.data?.token);
+            localStorage.setItem("user", res?.data?.data);
+            setIsLoggedIn(true);
             navigate("/");
 
         } catch (error) {
@@ -70,43 +75,43 @@ function Register() {
     return (
         <div className="h-full w-full bg-blue-300 flex items-center justify-center">
 
-            <form onSubmit={onSubmit} action="" className="w-[375px] min-h-[375px] bg-slate-800 rounded-lg relative">
+            <form onSubmit={onSubmit} action="" className="w-[375px] min-h-[400px] bg-slate-800 rounded-lg relative">
                 <div className=" w-full bg-slate-900 flex justify-center items-center">
                     <h1 className="bg-blue-600 w-[10rem] text-center text-2xl font-bold rounded-lg p-1 absolute -top-7 left-1/2 -translate-x-1/2">Register</h1>
                     <img src={Image} alt="User" className="h-20 w-20 object-contain relative top-6 " />
                 </div>
                 <div className="w-full px-10 text-gray-800 mt-2">
 
-                    <div className="mt-2 w-full flex flex-col items-center gap-2">
-                        <div className="w-full flex  flex-col  mt-6">
+                    <div className="w-full flex flex-col items-center gap-1">
+                        <div className="w-full flex  flex-col  mt-4 gap-1">
                             <label htmlFor="name" className="text-gray-400 text-xs">Name</label>
                             <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} className="bg-slate-500 rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your name" />
-                            <span className="text-rose-600 text-start text-sm">
+                            <span className="text-rose-600 text-start text-xs">
                                 {errors.name}
                             </span>
                         </div>
 
 
-                        <div className="w-full flex  flex-col  mt-1 ">
+                        <div className="w-full flex  flex-col gap-1">
                             <label htmlFor="email" className="text-gray-400 text-xs">Email</label>
                             <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-slate-500 rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your email" />
-                            <span className="text-rose-600 text-start text-sm">
+                            <span className="text-rose-600 text-start text-xs">
                                 {errors.email}
                             </span>
                         </div>
 
-                        <div className="w-full flex  flex-col  mt-1 ">
+                        <div className="w-full flex  flex-col  gap-1">
                             <label htmlFor="date" className="text-gray-400 text-xs">Date of Birth</label>
                             <input type="date" id="email" value={DOB} onChange={(e) => setDOB(e.target.value)} className="bg-slate-500  rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your DOB" />
-                            <span className="text-rose-600 text-start text-sm">
+                            <span className="text-rose-600 text-start text-xs">
                                 {errors.DOB}
                             </span>
                         </div>
 
-                        <div className="w-full flex  flex-col  mt-1 ">
+                        <div className="w-full flex  flex-col  gap-1 ">
                             <label htmlFor="password" className="text-gray-400 text-xs">Password</label>
                             <input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-slate-500  rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your password" />
-                            <span className="text-rose-600 text-start text-sm">
+                            <span className="text-rose-600 text-start text-xs">
                                 {errors.password}
                             </span>
                         </div>
@@ -120,7 +125,7 @@ function Register() {
                             {rootError}
                         </span>
 
-                        <p className="text-blue-500 mb-4 cursor-pointer hover:underline">
+                        <p className="text-blue-500 mb-2 cursor-pointer hover:underline">
                             <Link to={"/login"}>
                                 Already have an Account ? Login
                             </Link>
