@@ -79,7 +79,7 @@ export const RegisterController = async (req: Request, res: Response) => {
 
         if (error instanceof ZodError) {
             const errors = formatError(error);
-            res.status(400).json(
+            res.status(422).json(
                 {
                     errors,
                     message: "Zod error"
@@ -167,7 +167,7 @@ export const LoginController = async (req: Request, res: Response) => {
 
         if (error instanceof ZodError) {
             const errors = formatError(error);
-            res.status(400).json(
+            res.status(422).json(
                 {
                     errors,
                     message: "Zod error"
