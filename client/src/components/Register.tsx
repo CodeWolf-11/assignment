@@ -85,7 +85,7 @@ function Register() {
                     <div className="w-full flex flex-col items-center gap-1">
                         <div className="w-full flex  flex-col  mt-4 gap-1">
                             <label htmlFor="name" className="text-gray-400 text-xs">Name</label>
-                            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} className="bg-slate-500 rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your name" />
+                            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} className="bg-slate-500 font-medium rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your name" />
                             <span className="text-rose-600 text-start text-xs">
                                 {errors.name}
                             </span>
@@ -94,7 +94,7 @@ function Register() {
 
                         <div className="w-full flex  flex-col gap-1">
                             <label htmlFor="email" className="text-gray-400 text-xs">Email</label>
-                            <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-slate-500 rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your email" />
+                            <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-slate-500 font-medium rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your email" />
                             <span className="text-rose-600 text-start text-xs">
                                 {errors.email}
                             </span>
@@ -102,7 +102,7 @@ function Register() {
 
                         <div className="w-full flex  flex-col  gap-1">
                             <label htmlFor="date" className="text-gray-400 text-xs">Date of Birth</label>
-                            <input type="date" id="email" value={DOB} onChange={(e) => setDOB(e.target.value)} className="bg-slate-500  rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your DOB" />
+                            <input type="date" id="email" value={DOB} onChange={(e) => setDOB(e.target.value)} className="bg-slate-500  font-medium rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your DOB" />
                             <span className="text-rose-600 text-start text-xs">
                                 {errors.DOB}
                             </span>
@@ -110,7 +110,7 @@ function Register() {
 
                         <div className="w-full flex  flex-col  gap-1 ">
                             <label htmlFor="password" className="text-gray-400 text-xs">Password</label>
-                            <input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-slate-500  rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your password" />
+                            <input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-slate-500 font-medium rounded-lg p-2 focus-visible:ring-0 focus-visible:ring-offset-0 " placeholder="Enter your password" />
                             <span className="text-rose-600 text-start text-xs">
                                 {errors.password}
                             </span>
