@@ -21,7 +21,6 @@ function TableComponent({ data }: {
 
     return (
         <div className="h-[90%] w-full p-4 pt-14 relative flex flex-col justify-between">
-            {/* <h1 className="text-2xl font-bold mb-4">User Information</h1> */}
             <button className="bg-red-500 p-2 rounded-lg text-white absolute top-1 right-1" onClick={() => {
                 localStorage.setItem("token", "");
                 localStorage.setItem("user", "");
