@@ -1,7 +1,7 @@
 import Password from "../icons/Password"
 import User from "../icons/User"
 import Image from "../assets/image.png";
-import { Link, useAsyncError } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import { LOGIN_URL } from "../lib/ApiEndpoints";
 import axios, { AxiosError } from "axios";
@@ -41,7 +41,7 @@ function Login() {
             });
             setIsLoading(false);
             localStorage.setItem("token", res?.data?.token);
-            localStorage.setItem("user", res?.data?.data);
+            localStorage.setItem("user", JSON.stringify(res?.data?.data));
             setIsLoggedIn(true);
             navigate("/");
 
@@ -63,7 +63,7 @@ function Login() {
         }
     }
     return (
-        <div className="h-full w-full bg-blue-300 flex items-center justify-center">
+        <div className="h-full w-full flex items-center justify-center">
 
             <form onSubmit={onSubmit} action="" className="w-[375px] min-h-[375px] bg-slate-800 rounded-lg relative">
                 <div className=" w-full bg-slate-900 flex justify-center items-center">
@@ -75,17 +75,17 @@ function Login() {
                     <div className="mt-2 w-full flex flex-col items-center gap-2">
                         <div className="w-full flex bg-slate-500 p-2 rounded-lg gap-2 items-center">
                             <User />
-                            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-slate-500 border-l-2 border-slate-400 px-2 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none" placeholder="Enter username" />
+                            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-slate-500 font-medium border-l-2 border-slate-400 px-2 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none" placeholder="Enter username" />
                         </div>
-                        <span className="text-rose-600 text-start w-full">
+                        <span className="text-rose-600 text-start w-full text-xs">
                             {errors.email}
                         </span>
 
                         <div className="w-full flex bg-slate-500 p-2 rounded-lg gap-2 items-center">
                             <Password />
-                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-slate-500 border-l-2 border-slate-400 px-2 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none" placeholder="Enter password" />
+                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-slate-500 font-medium border-l-2 border-slate-400 px-2 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none" placeholder="Enter password" />
                         </div>
-                        <span className="text-rose-600 w-full text-start">
+                        <span className="text-rose-600 w-full text-start text-xs">
                             {errors.password}
                         </span>
                         <span className="text-end ml-auto text-blue-700 hover:underline cursor-pointer">
@@ -95,7 +95,7 @@ function Login() {
                         <button disabled={isLoading} className="rounded-lg w-full p-2 text-xl font-medium  bg-blue-600 ">
                             {isLoading ? "Processing..." : "Login"}
                         </button>
-                        <span className="text-rose-600 text-sm">
+                        <span className="text-rose-600 text-xs">
                             {rootError}
                         </span>
 

@@ -48,7 +48,7 @@ function Register() {
             });
             setIsLoading(false);
             localStorage.setItem("token", res?.data?.token);
-            localStorage.setItem("user", res?.data?.data);
+            localStorage.setItem("user", JSON.stringify(res?.data?.user));
             setIsLoggedIn(true);
             navigate("/");
 
@@ -73,7 +73,7 @@ function Register() {
     }
 
     return (
-        <div className="h-full w-full bg-blue-300 flex items-center justify-center">
+        <div className="h-full w-full  flex items-center justify-center">
 
             <form onSubmit={onSubmit} action="" className="w-[375px] min-h-[400px] bg-slate-800 rounded-lg relative">
                 <div className=" w-full bg-slate-900 flex justify-center items-center">
